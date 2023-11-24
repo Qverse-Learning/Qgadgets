@@ -314,6 +314,12 @@
               : "You have to login to view your Wishlist..."
           }}
         </p>
+
+        <p v-if="!store.token" class="row q-mt-sm justify-center">
+          <q-btn color="primary" no-caps @click="store.modals = !store.modals">
+            Login
+          </q-btn>
+        </p>
       </div>
     </div>
 
@@ -778,7 +784,7 @@ const handleAuthModal = () => {
 watch(
   () => data.value.payment_method,
   (newValue, oldValue) => {
-    console.log(`Value changed from ${oldValue} to ${newValue}`);
+    // console.log(`Value changed from ${oldValue} to ${newValue}`);
     // You can perform actions here when myValue changes
 
     if (newValue === "Bank Transfer") {
@@ -812,7 +818,7 @@ const register = () => {
   authAxios
     .post("customers/customer-registration", signupData.value)
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       loadauth.value = false;
       loginModal.value = false;
       signupModal.value = false;
@@ -850,7 +856,7 @@ const login = () => {
   authAxios
     .post("customers/login-customer", loginData.value)
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       loadauth.value = false;
       store.setUserDetails(response.data);
       Notify.create({
@@ -865,12 +871,13 @@ const login = () => {
       getDataMounted();
     })
     .catch(({ response }) => {
+      // console.log(response);
       loadauth.value = false;
       errorsText.value = response.data.errors;
       Notify.create({
-        message: `An error occured.`,
+        message: response.data.errors,
         color: "red",
-        position: "bottom",
+        position: "top",
         actions: [{ icon: "close", color: "white" }],
       });
     });
@@ -899,7 +906,7 @@ const removeFromWishlist = (item) => {
   authAxios
     .delete(`customer/dashboard/wishlist/remove?product_id=${item.product.id}`)
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       loadingWishList.value = false;
       store.getWish();
       // getDataMounted();
@@ -955,7 +962,7 @@ const pay = async () => {
 
   let productcartArr = [];
   cartStore.cart.map((item) => {
-    console.log(item);
+    // console.log(item);
     let orders = {
       id: item.product.id,
       product_name: item.product.product_name,
@@ -1005,7 +1012,7 @@ const pay = async () => {
       authAxios
         .post("checkout/upload-receipt", formData)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           loadingbtn.value = false;
 
           window.location.href = response.data.url;
@@ -1023,7 +1030,7 @@ const pay = async () => {
         })
         .catch(({ response }) => {
           loadingbtn.value = false;
-          console.log(response);
+          // console.log(response);
           if (response.status === 500) {
             Notify.create({
               message:
@@ -1063,7 +1070,7 @@ const pay = async () => {
     authAxios
       .post("checkout/paystack-payment-gateway", filteredObj1)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         loadingbtn.value = false;
         window.location.href = response.data.link;
         cartStore.cart = [];
@@ -1148,7 +1155,7 @@ const pay = async () => {
       authAxios
         .post("checkout/wallet-payment-gateway", filteredObj1)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           loadingbtn.value = false;
           window.location.href = response.data;
           cartStore.cart = [];
@@ -1173,7 +1180,7 @@ const pay = async () => {
         });
     }
   } else {
-    console.log("Hello");
+    // console.log("Hello");
   }
 };
 
@@ -1249,7 +1256,9 @@ onMounted(() => {
       backTopBtn.classList.add("active");
     } else {
       header.classList.remove("active");
-      backTopBtn.classList.remove("active");
+      if (backTopBtn) {
+        backTopBtn.classList.remove("active");
+      }
     }
   };
 

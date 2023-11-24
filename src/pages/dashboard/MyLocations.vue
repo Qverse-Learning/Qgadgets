@@ -60,9 +60,9 @@ export default {
       this.$authAxios
         .get("customer/dashboard/customer-location")
         .then((data) => {
+          console.log(data);
           this.loading = false;
-          this.location = data.data.details;
-          // console.log(data);
+          this.location = data.data.details ? data.data.details : [];
         })
         .catch(({ response }) => {
           this.loading = false;

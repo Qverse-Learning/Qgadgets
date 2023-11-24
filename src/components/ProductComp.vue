@@ -68,19 +68,21 @@
     <div class="card-content">
       <h3 class="h3">
         <router-link
+          v-if="router.currentRoute.value.name !== 'dashboard'"
           :to="{
             name: 'product.detail',
-            params: { id: data.slug },
+            params: { id: data.slug ? data.slug : data.id },
           }"
           class="card-title"
           >{{ data.product_name }}</router-link
         >
+        <div v-else class="card-title">{{ data.product_name }}</div>
       </h3>
 
       <div class="card-price">
         <del class="del">₦{{ parseInt(data.price) + 100 }}</del>
 
-        <data class="price" value="10"
+        <data class="price" :value="data.price"
           >₦{{ parseInt(data.price).toLocaleString() }}</data
         >
       </div>
@@ -115,7 +117,7 @@ const addtoWishList = () => {
       product_id: data.value.id,
     })
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       const updatedItemIndex = products.value.findIndex(
         (i) => i.id === data.value.id
       );
@@ -133,7 +135,7 @@ const addtoWishList = () => {
     .catch(({ response }) => {
       data.value.liked = !data.value.liked;
 
-      console.log(response);
+      // console.log(response);
       Notify.create({
         message: response.data.message,
         color: "red",

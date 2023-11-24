@@ -87,7 +87,7 @@
 
     <div
       v-if="!loading && orders.message === 'No Order has been placed by You'"
-      class="empty"
+      class="empty q-mt-xl"
     >
       <img src="/empty.svg" alt="" />
       <!-- {{ order }} -->
@@ -97,16 +97,16 @@
         <q-btn
           style="text-transform: capitalize"
           color="secondary"
-          :to="{ name: 'shop' }"
+          :to="{ name: 'homepage' }"
           text-color="white"
-          label="Order Grocery"
+          label="Make Order"
         />
-        <q-btn
+        <!-- <q-btn
           style="text-transform: capitalize"
           color="primary"
           :to="{ name: 'foodshome' }"
           label="Order Food"
-        />
+        /> -->
       </div>
     </div>
   </q-page>
@@ -136,9 +136,10 @@ export default {
           console.log(data);
           this.orders = data.orders;
           if (data) {
+            // console.log("first");
             this.orders = {
               ...data,
-              message: "orders made",
+              message: data.message,
             };
           }
         })

@@ -20,15 +20,15 @@ export default {
   methods: {
     getToken() {
       let token = this.$router.currentRoute.value.query.token;
-      console.log(token);
+      // console.log(token);
       authAxios
         .get(`customers/email-verification?token=${token}`)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
         })
         .catch((error) => {
           // Handle the error
-          console.log(error);
+          // console.log(error);
           this.$q.notify({
             message: "Error",
             color: "red",

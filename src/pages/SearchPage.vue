@@ -69,7 +69,7 @@ const getSearchedProducts = (searchTerm) => {
   authAxios
     .post(`search/search-all?query=${searchTerm}`)
     .then(({ data }) => {
-      console.log(data);
+      // console.log(data);
       latestProducts.value = data.products;
       loading.value = false;
     })

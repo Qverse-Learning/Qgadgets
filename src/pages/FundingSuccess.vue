@@ -33,7 +33,7 @@ export default {
       authAxios
         .get(`customer/dashboard/wallet-callback?reference=${ref}`)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           this.$q.notify({
             message: response.data.message,
             color: "green",
@@ -44,7 +44,7 @@ export default {
         })
         .catch((error) => {
           // Handle the error
-          console.log(error);
+          // console.log(error);
           this.$q.notify({
             message: "Error",
             color: "red",
@@ -59,11 +59,11 @@ export default {
         .then((response) => {
           this.loading = false;
           store.userdetails = { ...response.data };
-          console.log(response);
+          // console.log(response);
         })
         .catch((error) => {
           // Handle the error
-          console.log(error);
+          // console.log(error);
           this.$q.notify({
             message: "Error",
             color: "red",

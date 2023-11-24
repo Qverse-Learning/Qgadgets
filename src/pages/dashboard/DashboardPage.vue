@@ -119,9 +119,11 @@
             </div>
 
             <div>
-              <data class="card-data" :value="orders.delivered">{{
-                orders.delivered
-              }}</data>
+              <data
+                class="card-data"
+                :value="orders.delivered ? orders.delivered : 0"
+                >{{ orders.delivered ? orders.delivered : 0 }}</data
+              >
 
               <p class="card-text">Delivered Orders</p>
             </div>
@@ -133,9 +135,11 @@
             </div>
 
             <div>
-              <data class="card-data" :value="orders.delivered">{{
-                orders.pending
-              }}</data>
+              <data
+                class="card-data"
+                :value="orders.pending ? orders.pending : 0"
+                >{{ orders.pending ? orders.pending : 0 }}</data
+              >
 
               <p class="card-text">Pending Orders</p>
             </div>
@@ -215,11 +219,39 @@
           <q-skeleton width="90%" height="300px" />
         </div>
 
-        <ul v-else class="project-list">
-          <li v-for="(product, index) in latestOrders" :key="index">
-            <ProductCompVue :data="product" />
-          </li>
-        </ul>
+        <div v-else>
+          <div
+            v-if="
+              !loading && orders.message === 'No Order has been placed by You'
+            "
+            class="empty q-mt-xl"
+          >
+            <img src="/empty.svg" alt="" />
+            <!-- {{ order }} -->
+            <div class="empty_text">You have not made any orders yet</div>
+
+            <div class="q-pa-md q-gutter-sm">
+              <q-btn
+                style="text-transform: capitalize"
+                color="secondary"
+                :to="{ name: 'homepage' }"
+                text-color="white"
+                label="Make Order"
+              />
+              <!-- <q-btn
+                style="text-transform: capitalize"
+                color="primary"
+                :to="{ name: 'foodshome' }"
+                label="Order Food"
+              /> -->
+            </div>
+          </div>
+          <ul v-else class="project-list">
+            <li v-for="(product, index) in orders.orders" :key="index">
+              <ProductCompVue :data="product" />
+            </li>
+          </ul>
+        </div>
       </section>
     </article>
   </main>
@@ -280,26 +312,35 @@ let latestOrders = ref([]);
 let orders = ref({});
 let loading = ref(false);
 
-const getLatestProducts = () => {
-  loading.value = true;
-  authAxios
-    .get("products/all-products")
-    .then(({ data }) => {
-      console.log(data);
-      loading.value = false;
-      latestOrders.value = data.products;
-    })
-    .catch(({ response }) => {
-      loading.value = false;
-    });
-};
+// const getLatestProducts = () => {
+//   loading.value = true;
+//   authAxios
+//     .get("products/all-products")
+//     .then(({ data }) => {
+//       console.log(data);
+//       loading.value = false;
+//       latestOrders.value = data.products;
+//     })
+//     .catch(({ response }) => {
+//       loading.value = false;
+//     });
+// };
 const getOrders = () => {
   loading.value = true;
   authAxios
     .get("customer/dashboard/customer-order")
     .then(({ data }) => {
-      console.log(data);
-      orders.value = data;
+      // console.log(data);
+      if (data) {
+        // console.log("first");
+        orders.value = {
+          ...data,
+          message: data.message,
+        };
+
+        // console.log(orders.value);
+      }
+      // orders.value = data;
       loading.value = false;
     })
     .catch(({ response }) => {
@@ -337,7 +378,7 @@ const fundWallet = () => {
     persistent: true,
   })
     .onOk((data) => {
-      console.log(">>>> OK, received", data);
+      // console.log(">>>> OK, received", data);
       Loading.show();
       authAxios
         .post("customer/dashboard/fund-wallet", {
@@ -385,7 +426,7 @@ const copy = () => {
 };
 
 onMounted(() => {
-  getLatestProducts();
+  // getLatestProducts();
   getOrders();
 });
 </script>

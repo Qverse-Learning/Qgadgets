@@ -70,7 +70,9 @@
         <div class="left_">
           <div class="sec">
             <div class="sec_text">Service Fee:</div>
-            <div class="amount_title">₦{{ details.delivery }}</div>
+            <div class="amount_title">
+              ₦{{ details.delivery.toLocaleString() }}
+            </div>
           </div>
           <div class="sec">
             <div class="sec_text">Sum Total Amount:</div>
@@ -140,7 +142,7 @@ export default {
       authAxios
         .get(`checkout/verify-orders?reference=${reference}`)
         .then(({ data }) => {
-          console.log(data);
+          // console.log(data);
           this.details = data;
           this.productOrderss = data.orders;
           this.productTotal = this.productOrderss.reduce((sum, i) => {

@@ -100,11 +100,34 @@
                 </button>
               </div>
 
-              <button @click="addtoCart" class="cart-btn">
-                <i class="fa-solid fa-bag-shopping"></i>
+              <div style="gap: 1rem" class="row items-center no-wrap">
+                <button @click="addtoCart" class="cart-btn">
+                  <i class="fa-solid fa-bag-shopping"></i>
 
-                <span class="span">Add to cart</span>
-              </button>
+                  <span class="span">Add to cart</span>
+                </button>
+                <button
+                  @click="
+                    product.liked === false
+                      ? addtoWishList()
+                      : removeFromWishlist()
+                  "
+                  class="card-action-btn"
+                  aria-label="add to whishlist"
+                  title="add to whishlist"
+                >
+                  <i
+                    style="font-size: 2.5rem"
+                    v-if="product.liked"
+                    class="fa-solid text-warning fa-heart"
+                  ></i>
+                  <i
+                    style="font-size: 2.5rem"
+                    v-else
+                    class="fa-regular fa-heart"
+                  ></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -128,15 +151,17 @@ import FooterComp from "src/components/FooterComp.vue";
 let loading = ref(false);
 import { useCartStore } from "src/stores/cart";
 import { useRouter } from "vue-router";
+import { useMyAuthStore } from "src/stores/auth";
 const route = useRouter();
 let store = useCartStore();
+let authStore = useMyAuthStore();
 const routeParams = ref(route.params);
 let product = ref({});
 let qty = ref(1);
 let recommendedProducts = ref({});
 watch(routeParams, (newParams, oldParams) => {
   // Handle the route parameter changes here
-  console.log("Route parameters changed:", newParams);
+  // console.log("Route parameters changed:", newParams);
 });
 const addtoCart = () => {
   let productValue = {
@@ -144,7 +169,7 @@ const addtoCart = () => {
     quantity: qty.value,
     detail: "detail",
   };
-  console.log(productValue);
+  // console.log(productValue);
   store.addTocart(productValue);
 };
 const addToQty = () => {
@@ -166,8 +191,16 @@ const getProductDetail = () => {
   authAxios
     .get(`products/single-product?product_id=${params}`)
     .then(({ data }) => {
-      console.log(data);
-      product.value = data.products[0];
+      // console.log(data);
+      let liked = authStore.allProducts.find(
+        (product) => product.id === data.products[0].id
+      );
+      // console.log(liked);
+      if (liked) {
+        product.value = { ...data.products[0], liked: true };
+      } else {
+        product.value = { ...data.products[0], liked: false };
+      }
       loading.value = false;
     })
     .catch(({ response }) => {
@@ -190,6 +223,57 @@ const getRecommendedProducts = () => {
         actions: [{ icon: "close", color: "white" }],
       });
     });
+};
+const addtoWishList = () => {
+  // console.log(data)
+  product.value.liked = !product.value.liked;
+  authAxios
+    .post(`customer/dashboard/wishlist/add`, {
+      product_id: product.value.id,
+    })
+    .then((response) => {
+      // console.log(response);
+      const updatedItemIndex = authStore.allProducts.findIndex(
+        (i) => i.id === product.value.id
+      );
+      if (updatedItemIndex !== -1) {
+        authStore.allProducts[updatedItemIndex].liked = product.value.liked;
+      }
+      Notify.create({
+        message: "Product added to favourites",
+        color: "green",
+      });
+      authStore.getWish();
+    })
+    .catch(({ response }) => {
+      product.value.liked = !product.value.liked;
+      // console.log(response);
+      Notify.create({
+        message: response.data.message,
+        color: "red",
+      });
+    });
+};
+
+const removeFromWishlist = () => {
+  product.value.liked = !product.value.liked;
+  authAxios
+    .delete(`customer/dashboard/wishlist/remove?product_id=${product.value.id}`)
+    .then((response) => {
+      const updatedItemIndex = authStore.allProducts.findIndex(
+        (i) => i.id === product.value.id
+      );
+      if (updatedItemIndex !== -1) {
+        authStore.allProducts[updatedItemIndex].liked = product.value.liked;
+      }
+      Notify.create({
+        message: "Product removed to favourites",
+        color: "green",
+      });
+
+      authStore.getWish();
+    })
+    .catch(({ response }) => {});
 };
 onMounted(() => {
   getProductDetail();

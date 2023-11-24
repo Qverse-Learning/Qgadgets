@@ -335,7 +335,7 @@ const getBrands = () => {
   authAxios
     .get("brands/all-brands")
     .then(({ data }) => {
-      console.log(data);
+      // console.log(data);
 
       brands.value = data.brands;
     })
@@ -346,7 +346,7 @@ const getCategories = () => {
   authAxios
     .get("categories/all-categories")
     .then(({ data }) => {
-      console.log(data);
+      // console.log(data);
       categories.value = data.categories;
     })
     .catch(({ response }) => {});

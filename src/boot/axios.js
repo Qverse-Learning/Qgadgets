@@ -26,7 +26,7 @@ export default boot(({ app, store, router }) => {
   app.config.globalProperties.$store = loadStore;
 
   let auth = store.state.value.myqmartauthPc;
-  console.log(auth);
+  // console.log(auth);
   authAxios.interceptors.response.use(function (response) {
     if (response.data && response.data.token) {
       token = response.data.token;
