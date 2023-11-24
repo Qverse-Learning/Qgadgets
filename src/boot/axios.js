@@ -39,9 +39,9 @@ export default boot(({ app, store, router }) => {
       return response;
     },
     (e) => {
-      console.log(e);
+      // console.log(e);
       let status_code = !e.response || e.response.status;
-      console.log(status_code);
+      // console.log(status_code);
       if (e.message === "Network Error") {
         Notify.create({
           message: e.message + " check your internet connection",
