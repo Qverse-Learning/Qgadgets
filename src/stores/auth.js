@@ -80,7 +80,7 @@ export const useMyAuthStore = defineStore("myqmartauthPc", {
               return { ...product1, liked: false };
             }
           });
-          console.log(mergedArray);
+          // console.log(mergedArray);
           this.allProducts = mergedArray;
           this.loadingCat = false;
         })
@@ -105,7 +105,7 @@ export const useMyAuthStore = defineStore("myqmartauthPc", {
             const foundProduct2 = this.wishList.find(
               (product2) => product2.product.id === product1.id
             );
-            console.log(foundProduct2);
+            // console.log(foundProduct2);
             if (foundProduct2) {
               return { ...product1, liked: true };
             } else {
@@ -132,7 +132,7 @@ export const useMyAuthStore = defineStore("myqmartauthPc", {
               return { ...product1, liked: false };
             }
           });
-          console.log(mergedArrayLatest);
+          // console.log(mergedArrayLatest);
           this.latestProducts = mergedArrayLatest;
           this.allProducts = mergedArray;
 
