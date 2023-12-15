@@ -22,6 +22,16 @@
           class="logo"
           >Qmarthub</router-link
         >
+        <!-- <router-link
+          :to="{
+            name: 'homepage',
+          }"
+          class="logo"
+          ><img
+            style="max-width: 200px; max-height: 100px"
+            src="/logo.jpg"
+            alt=""
+        /></router-link> -->
 
         <div class="header-action items-center">
           <button
