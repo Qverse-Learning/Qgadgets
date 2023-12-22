@@ -55,13 +55,15 @@
 
         <section class="section about" id="about" aria-label="about">
           <div class="container">
-            <h2 class="section-title">Qmarthub Store</h2>
+            <h2 class="section-title">Qtekhub Store</h2>
 
             <p class="section-text">
-              When you start with a portrait and search for a pure form, a clear
-              volume, through successive eliminations, you arrive inevitably at
-              the egg. Likewise, starting with the egg and following the same
-              process in reverse, one finishes with the portrait.
+              At Qtekhub, we redefine the world of technology by offering a
+              curated selection of cutting-edge gadgets that seamlessly blend
+              innovation, functionality, and style. As your trusted gadget
+              partner, we take pride in providing a one-stop destination for
+              tech enthusiasts, where customer satisfaction and uncompromising
+              quality take center stage.
             </p>
           </div>
         </section>

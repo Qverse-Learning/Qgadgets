@@ -3,7 +3,16 @@
     <div class="container">
       <div class="footer-top section">
         <div class="footer-brand">
-          <a href="#" class="logo">Qmarthub</a>
+          <router-link
+            :to="{
+              name: 'homepage',
+            }"
+            class="logo"
+            ><img
+              style="max-width: 200px; max-height: 150px"
+              src="/logo.png"
+              alt=""
+          /></router-link>
 
           <ul>
             <li class="footer-list-item">
@@ -20,7 +29,7 @@
               <a href="tel:+2347044914032" class="footer-link">07044914032</a>
             </li>
 
-            <li>
+            <!-- <li>
               <ul class="social-list">
                 <li>
                   <a
@@ -52,7 +61,7 @@
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> -->
           </ul>
         </div>
 
@@ -65,11 +74,12 @@
           </li> -->
 
           <li>
-            <a
-              href="https://qmarthub.com/terms"
-              target="_blank"
+            <router-link
+              :to="{
+                name: 'terms',
+              }"
               class="footer-link"
-              >Terms & Conditions</a
+              >Terms & Conditions</router-link
             >
           </li>
         </ul>
@@ -80,17 +90,18 @@
           </li>
 
           <li>
-            <a
-              href="https://qmarthub.com/about"
-              target="_blank"
+            <router-link
+              :to="{
+                name: 'about',
+              }"
               class="footer-link"
-              >About Us</a
+              >About Us</router-link
             >
           </li>
 
           <li>
             <a
-              href="mailto:info@qmarthub.com"
+              href="mailto:info@qtekhub.com"
               target="_blank"
               class="footer-link"
               >Contact Us</a
@@ -98,7 +109,7 @@
           </li>
         </ul>
 
-        <div class="footer-list">
+        <!-- <div class="footer-list">
           <p class="footer-list-title">Newsletter</p>
 
           <form action="" class="footer-form">
@@ -129,13 +140,13 @@
               >Policy</a
             >
           </div>
-        </div>
+        </div>-->
       </div>
 
       <div class="footer-bottom">
         <p class="copyright">
           &copy; {{ new Date().getFullYear() }} All Rights Reserved by
-          <a href="#" class="copyright-link">QmartHub</a>.
+          <span class="copyright-link">Qtekhub</span>.
         </p>
       </div>
     </div>

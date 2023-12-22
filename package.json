@@ -1,8 +1,8 @@
 {
-  "name": "qmarthubgadgets",
+  "name": "qtekhub",
   "version": "0.0.1",
-  "description": "qmarthubgadgets",
-  "productName": "qmarthubgadgets",
+  "description": "Welcome to Qtekhub – Your Ultimate Destination for Quality Computer Gadgets and Devices! We redefine the world of technology by offering a curated selection of cutting-edge gadgets that seamlessly blend innovation, functionality, and style. As your trusted gadget partner, we take pride in providing a one-stop destination for tech enthusiasts, where customer satisfaction and uncompromising quality take center stage.",
+  "productName": "Qtekhub",
   "author": "emmanueltlom <nwabuodafiemmanuel@gmail.com>",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
     "format": "prettier --write \"**/*.{js,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
+    "icons": "icongenie generate -i logo.png --theme-color",
     "build": "quasar build"
   },
   "dependencies": {

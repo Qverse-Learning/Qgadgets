@@ -87,7 +87,16 @@ const routes = [
 
   // Always leave this as last one,
   // but you can also remove it
-
+  {
+    path: "/terms-and-conditions",
+    component: () => import("pages/TermsPage.vue"),
+    name: "terms",
+  },
+  {
+    path: "/about-us",
+    component: () => import("pages/AboutPage.vue"),
+    name: "about",
+  },
   {
     path: "/:catchAll(.*)*",
     component: () => import("pages/ErrorNotFound.vue"),

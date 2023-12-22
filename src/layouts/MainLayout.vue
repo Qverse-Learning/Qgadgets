@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <header class="header" data-header>
-      <div class="container">
+      <div style="height: 70px" class="container">
         <div class="input-wrapper">
           <input
             type="search"
@@ -15,23 +15,23 @@
           <i class="fa-solid fa-magnifying-glass"></i>
         </div>
 
-        <router-link
-          :to="{
-            name: 'homepage',
-          }"
-          class="logo"
-          >Qmarthub</router-link
-        >
         <!-- <router-link
           :to="{
             name: 'homepage',
           }"
           class="logo"
+          >Qmarthub</router-link
+        > -->
+        <router-link
+          :to="{
+            name: 'homepage',
+          }"
+          class="logo"
           ><img
-            style="max-width: 200px; max-height: 100px"
-            src="/logo.jpg"
+            style="max-width: 200px; max-height: 150px"
+            src="/logo.png"
             alt=""
-        /></router-link> -->
+        /></router-link>
 
         <div class="header-action items-center">
           <button
