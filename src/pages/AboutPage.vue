@@ -57,12 +57,12 @@
           </p>
         </div>
 
-        <div class="img">
+        <!-- <div class="img">
           <img
             src="https://www-konga-com-res.cloudinary.com/image/upload/w_auto,f_auto,fl_lossy,dpr_auto,q_auto/assets/images/content/company_overview.png"
             alt=""
           />
-        </div>
+        </div> -->
       </section>
 
       <div class="values">
@@ -206,10 +206,10 @@ main .top h3 {
 .main_area {
   background: #f9f9f9;
   padding: 3rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 2rem;
-  align-items: center;
+  // display: grid;
+  // grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  // gap: 2rem;
+  // align-items: center;
 }
 
 .main_area img {
@@ -223,7 +223,7 @@ main .top h3 {
   color: #1c1d1f;
 }
 .main_area p {
-  font-size: 0.875rem;
+  // font-size: 0.875rem;
   margin-top: 0.9375rem;
   color: #8f8f8f;
 }
